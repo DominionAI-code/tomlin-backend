@@ -28,7 +28,9 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tomlin-backend.onrender.com', 'localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = ['https://tomlin-backend.onrender.com']
 
 
 # Application definition
@@ -45,8 +47,7 @@ INSTALLED_APPS = [
     "api",  # Your Django app
 ]
 
-# Remove Channels ASGI settings
-ASGI_APPLICATION = None  # Remove if it was set
+
 
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # ✅ Set ASGI application
-ASGI_APPLICATION = ".asgi.application"
+ASGI_APPLICATION = "config.asgi.application"
 
 # ✅ Define WebSocket layer
 CHANNEL_LAYERS = {
