@@ -5,6 +5,9 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.db.models import Sum, F
 from django.db.models.functions import TruncDay, TruncWeek, TruncMonth, TruncYear
 from datetime import date
+from django.http import HttpResponse, Http404
+from django.conf import settings
+import os
 from .models import CustomUser
 from .models import MenuItem, Inventory, Employee, LeasePayment, Order, Expense
 from .serializers import (
@@ -146,3 +149,11 @@ class LeasePaymentViewSet(viewsets.ModelViewSet):
 class ExpenseViewSet(viewsets.ModelViewSet):
     queryset = Expense.objects.all().order_by('-date')
     serializer_class = ExpenseSerializer
+
+def serve_media(request, path):
+    media_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(media_path):
+        with open(media_path, 'rb') as f:
+            return HttpResponse(f.read(), content_type="image/png")
+    else:
+        raise Http404("Image not found")

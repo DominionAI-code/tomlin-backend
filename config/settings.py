@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['tomlin-backend.onrender.com', 'localhost', '127.0.0.1']
 
@@ -101,7 +101,6 @@ DATABASES = {
     "default": dj_database_url.parse(config("DATABASE_URL"))
 }
 
-# settings.py
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -169,6 +168,10 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
         },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
     },
     'loggers': {
         'django.request': {
