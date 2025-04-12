@@ -16,7 +16,8 @@ router.register(r'reports/expenses', ExpenseViewSet, basename='expenses')
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    # path('api/', include(router.urls)),
+    path('', include(router.urls)),
 
     # Custom API views under /api/
     path('api/orders/create/', create_order, name="create_order"),
